@@ -151,6 +151,15 @@
   .devil .lab{ color:#8FE3B4; }
   .devil .v{ color:#C9CFD3; font-size:14px; }
   .devil .v b{ color:#FFFFFF; }
+
+  /* 위험 신호 음성 듣기 버튼 */
+  .impact{ flex-wrap:wrap; }
+  .tts-btn{ margin-left:auto; flex:none; border:1px solid var(--hair-strong); background:#fff;
+    color:var(--ink-2); border-radius:999px; font-size:11px; font-weight:700; padding:2px 10px;
+    cursor:pointer; display:inline-flex; align-items:center; gap:4px; line-height:1.6; }
+  .tts-btn:hover{ border-color:var(--green); color:var(--green-deep); }
+  .tts-btn.on{ background:var(--green); color:#fff; border-color:var(--green); }
+  @media print{ .tts-btn{ display:none; } }
 </style>
 
 <!-- ══ 표지 (p.1) ══ -->
@@ -362,3 +371,31 @@
   </footer>
 
 </div>
+
+<script>
+(function(){
+  if(!('speechSynthesis' in window)) return;
+  document.querySelectorAll('.impact').forEach(function(box){
+    if(box.querySelector('.tts-btn')) return;
+    var spans = box.querySelectorAll('span');
+    var label = spans.length ? spans[0].textContent.trim() : '';
+    var body  = spans.length > 1 ? spans[spans.length-1].textContent.trim() : box.textContent.trim();
+    var text  = (label ? label + '. ' : '') + body;
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'tts-btn'; b.innerHTML = '\uD83D\uDD0A 듣기';
+    b.addEventListener('click', function(){
+      if(b.classList.contains('on')){ window.speechSynthesis.cancel(); b.classList.remove('on'); return; }
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.tts-btn.on').forEach(function(x){ x.classList.remove('on'); });
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ko-KR'; u.rate = 1.0; u.pitch = 1.0;
+      u.onend = function(){ b.classList.remove('on'); };
+      u.onerror = function(){ b.classList.remove('on'); };
+      b.classList.add('on');
+      window.speechSynthesis.speak(u);
+    });
+    box.appendChild(b);
+  });
+})();
+</script>
+
