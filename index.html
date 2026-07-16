@@ -35,6 +35,11 @@
   .top-spacer{ flex:1; }
   .top-badge{ font-size:11.5px; color:var(--green-d); background:var(--green-t); border:1px solid #CDE9D8;
     border-radius:999px; padding:4px 11px; font-weight:700; }
+  .top-info{ display:flex; align-items:center; gap:9px; margin-right:12px; font-size:11.5px;
+    color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .top-info .sep{ opacity:.35; }
+  .top-info b{ color:var(--ink-2); font-weight:700; }
+  @media (max-width:720px){ .top-info{ display:none; } }
 
   /* ── 히어로 ── */
   .hero{ max-width:1400px; margin:0 auto; padding:30px 22px 8px; text-align:center; }
@@ -108,6 +113,13 @@
       <div class="txt"><b>인노사 데일리 정보</b><span>인사·노무 리스크 데일리 브리핑</span></div>
     </div>
     <div class="top-spacer"></div>
+    <div class="top-info">
+      <span id="w-time">--:--:--</span>
+      <span class="sep">·</span>
+      <span id="w-weather">서울 …</span>
+      <span class="sep">·</span>
+      <span id="w-fx">환율 …</span>
+    </div>
     <div class="top-badge" id="count-badge">리포트 0건</div>
   </div>
 </header>
@@ -198,6 +210,43 @@
       mainEl.innerHTML = '<div class="empty"><div class="big">목록을 불러오지 못했습니다.</div>'
         + '<p>GitHub Pages 또는 로컬 서버(예: <code>python -m http.server</code>)로 열어 주세요. 파일을 브라우저에서 직접 열면 보안 정책상 목록이 로드되지 않을 수 있습니다.</p></div>';
     });
+})();
+
+// ── 상단 위젯: 시간 · 날씨 · 환율 ──
+(function(){
+  var WD = ['일','월','화','수','목','금','토'];
+  function pad(n){ return (n<10?'0':'')+n; }
+  var timeEl = document.getElementById('w-time');
+  function tick(){
+    var d = new Date();
+    timeEl.innerHTML = d.getFullYear()+'.'+pad(d.getMonth()+1)+'.'+pad(d.getDate())
+      +' ('+WD[d.getDay()]+') <b>'+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds())+'</b>';
+  }
+  tick(); setInterval(tick, 1000);
+
+  // 서울 날씨 (Open-Meteo, 키 불필요)
+  function wIcon(c){
+    if(c===0) return '☀️'; if(c<=3) return '⛅'; if(c<=48) return '🌫️';
+    if(c<=67) return '🌧️'; if(c<=77) return '🌨️'; if(c<=82) return '🌦️';
+    if(c<=86) return '🌨️'; return '⛈️';
+  }
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.978&current=temperature_2m,weather_code&timezone=Asia%2FSeoul')
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      var t = Math.round(j.current.temperature_2m);
+      document.getElementById('w-weather').innerHTML = wIcon(j.current.weather_code)+' 서울 <b>'+t+'°</b>';
+    })
+    .catch(function(){ document.getElementById('w-weather').textContent = '서울 날씨 —'; });
+
+  // 환율 USD/KRW (open.er-api.com, 키 불필요)
+  fetch('https://open.er-api.com/v6/latest/USD')
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      var k = Math.round((j.rates && j.rates.KRW) || 0);
+      if(!k) throw new Error('no rate');
+      document.getElementById('w-fx').innerHTML = '💵 <b>'+k.toLocaleString('ko-KR')+'</b>원/$';
+    })
+    .catch(function(){ document.getElementById('w-fx').textContent = '환율 —'; });
 })();
 </script>
 </body>
