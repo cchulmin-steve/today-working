@@ -35,11 +35,12 @@
   .top-spacer{ flex:1; }
   .top-badge{ font-size:11.5px; color:var(--green-d); background:var(--green-t); border:1px solid #CDE9D8;
     border-radius:999px; padding:4px 11px; font-weight:700; }
-  .top-info{ display:flex; align-items:center; gap:9px; margin-right:12px; font-size:11.5px;
+  .top-info{ display:flex; align-items:center; gap:11px; margin-right:12px; font-size:13.5px;
     color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap; }
   .top-info .sep{ opacity:.35; }
   .top-info b{ color:var(--ink-2); font-weight:700; }
-  @media (max-width:720px){ .top-info{ display:none; } }
+  @media (max-width:1080px){ .top-info{ font-size:12px; gap:8px; } }
+  @media (max-width:900px){ .top-info{ display:none; } }
 
   /* ── 히어로 ── */
   .hero{ max-width:1400px; margin:0 auto; padding:30px 22px 8px; text-align:center; }
@@ -119,6 +120,8 @@
       <span id="w-weather">서울 …</span>
       <span class="sep">·</span>
       <span id="w-fx">환율 …</span>
+      <span class="sep">·</span>
+      <span id="w-kospi">코스피 …</span>
     </div>
     <div class="top-badge" id="count-badge">리포트 0건</div>
   </div>
@@ -247,6 +250,19 @@
       document.getElementById('w-fx').innerHTML = '💵 <b>'+k.toLocaleString('ko-KR')+'</b>원/$';
     })
     .catch(function(){ document.getElementById('w-fx').textContent = '환율 —'; });
+
+  // 코스피 (market.json, 같은 출처 — 매일 갱신)
+  fetch('market.json', {cache:'no-store'})
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if(!j.kospi) throw new Error('no kospi');
+      var p = j.kospi.price, c = j.kospi.pct, up = c >= 0;
+      var col = up ? '#C0392B' : '#1E6FD9';   // 상승 빨강 / 하락 파랑
+      document.getElementById('w-kospi').innerHTML =
+        '📈 코스피 <b>'+p.toLocaleString('ko-KR')+'</b> <span style="color:'+col+';font-weight:700">'
+        +(up?'▲':'▼')+Math.abs(c).toFixed(2)+'%</span>';
+    })
+    .catch(function(){ document.getElementById('w-kospi').textContent = '코스피 —'; });
 })();
 </script>
 </body>
