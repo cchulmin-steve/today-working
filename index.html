@@ -155,6 +155,7 @@
     <div class="foot-tools-h">관련 도구</div>
     <ol>
       <li>🇰🇷 <b>Korean Law MCP</b> <span>(한국 법률/판례 검색)</span></li>
+      <li>🍜 <b>Korean Restaurant MCP</b> <span>(전국 맛집 검색)</span></li>
     </ol>
   </div>
 </footer>
@@ -206,7 +207,7 @@
       +   '<a class="btn ghost" href="'+esc(r.pdf)+'" target="_blank" rel="noopener">새 탭에서 열기</a>'
       +   '<a class="btn primary" href="'+esc(r.pdf)+'" download="'+esc(r.date)+'_인사노무리스크리포트.pdf">PDF 다운로드</a>'
       + '</div>'
-      + '<div class="viewer-wrap"><iframe class="viewer" id="viewer" src="'+esc(r.html)+'" title="리포트 본문"></iframe></div>';
+      + '<div class="viewer-wrap"><iframe class="viewer" id="viewer" src="'+esc(r.html)+'?v='+Date.now()+'" title="리포트 본문"></iframe></div>';
 
     var vf = document.getElementById('viewer');
     vf.style.height = '900px';
