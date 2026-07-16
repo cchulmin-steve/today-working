@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>인노사 데일리 정보</title>
+<style>
+  :root{
+    --green:#00A651; --green-d:#00723A; --green-t:#E7F5EC;
+    --ink:#18211C; --ink-2:#46534B; --muted:#7A867E;
+    --line:#E7ECE8; --bg:#FFFFFF; --bg-2:#F7FAF8; --card:#FFFFFF;
+    --shadow:0 1px 2px rgba(16,32,24,.04), 0 8px 24px rgba(16,32,24,.06);
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--bg-2); color:var(--ink);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","맑은 고딕","Noto Sans KR",system-ui,sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  a{ color:var(--green-d); text-decoration:none; }
+
+  /* ── 헤더 ── */
+  header.top{
+    position:sticky; top:0; z-index:20;
+    background:rgba(255,255,255,.86); backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .top-in{ max-width:1180px; margin:0 auto; padding:14px 22px; display:flex; align-items:center; gap:14px; }
+  .logo{ display:flex; align-items:center; gap:11px; }
+  .logo .mark{ width:34px; height:34px; border-radius:9px; background:linear-gradient(135deg,var(--green),var(--green-d));
+    display:flex; align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:15px; letter-spacing:-.5px; box-shadow:var(--shadow); }
+  .logo .txt b{ font-size:18px; font-weight:800; letter-spacing:-.02em; display:block; line-height:1.1; }
+  .logo .txt span{ font-size:11.5px; color:var(--muted); }
+  .top-spacer{ flex:1; }
+  .top-badge{ font-size:11.5px; color:var(--green-d); background:var(--green-t); border:1px solid #CDE9D8;
+    border-radius:999px; padding:4px 11px; font-weight:700; }
+
+  /* ── 히어로 ── */
+  .hero{ max-width:1180px; margin:0 auto; padding:30px 22px 8px; }
+  .hero h1{ margin:0; font-size:26px; font-weight:800; letter-spacing:-.02em; }
+  .hero h1 .ac{ color:var(--green); }
+  .hero p{ margin:8px 0 0; color:var(--ink-2); font-size:14.5px; max-width:70ch; }
+
+  /* ── 레이아웃 ── */
+  .layout{ max-width:1180px; margin:0 auto; padding:20px 22px 60px; display:grid; grid-template-columns:340px 1fr; gap:22px; align-items:start; }
+
+  /* 리스트 */
+  .side{ position:sticky; top:78px; }
+  .side h2{ font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:0 0 10px 4px; font-weight:800; }
+  .list{ display:flex; flex-direction:column; gap:9px; max-height:calc(100vh - 130px); overflow:auto; padding:2px; }
+  .item{ text-align:left; width:100%; background:var(--card); border:1px solid var(--line); border-radius:13px;
+    padding:13px 15px; cursor:pointer; box-shadow:var(--shadow); transition:border-color .15s, transform .05s; }
+  .item:hover{ border-color:#BFE3CD; }
+  .item:active{ transform:translateY(1px); }
+  .item.on{ border-color:var(--green); box-shadow:0 0 0 2px var(--green-t), var(--shadow); }
+  .item .d{ display:flex; align-items:center; gap:8px; }
+  .item .date{ font-weight:800; font-size:14px; font-variant-numeric:tabular-nums; }
+  .item .new{ font-size:9.5px; font-weight:800; color:#fff; background:var(--green); border-radius:999px; padding:1px 7px; letter-spacing:.02em; }
+  .item .t{ font-size:12.5px; color:var(--ink-2); margin-top:3px; }
+  .item .sm{ font-size:11.5px; color:var(--muted); margin-top:5px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .item .tags{ margin-top:8px; display:flex; gap:5px; flex-wrap:wrap; }
+  .item .tag{ font-size:10px; color:var(--green-d); background:var(--bg-2); border:1px solid var(--line); border-radius:999px; padding:1px 8px; }
+
+  /* 본문 */
+  .main{ background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); overflow:hidden; min-height:60vh; }
+  .doc-head{ padding:18px 22px 14px; border-bottom:1px solid var(--line); }
+  .doc-head .date{ color:var(--green-d); font-weight:800; font-size:12.5px; font-variant-numeric:tabular-nums; }
+  .doc-head h2{ margin:4px 0 0; font-size:20px; font-weight:800; letter-spacing:-.01em; }
+
+  /* PDF 첨부 바 */
+  .attach{ display:flex; align-items:center; gap:12px; margin:14px 22px 0; padding:12px 15px;
+    background:var(--green-t); border:1px solid #CDE9D8; border-radius:12px; flex-wrap:wrap; }
+  .attach .ic{ width:34px; height:38px; border-radius:6px; background:#fff; border:1px solid #CDE9D8; position:relative; flex:none;
+    display:flex; align-items:flex-end; justify-content:center; }
+  .attach .ic::after{ content:"PDF"; font-size:8px; font-weight:900; color:#D64545; margin-bottom:4px; letter-spacing:-.3px; }
+  .attach .info{ line-height:1.3; }
+  .attach .info b{ font-size:13px; }
+  .attach .info span{ display:block; font-size:11px; color:var(--muted); }
+  .attach .sp{ flex:1; }
+  .btn{ font-size:12.5px; font-weight:700; border-radius:9px; padding:8px 13px; cursor:pointer; border:1px solid var(--green); }
+  .btn.primary{ background:var(--green); color:#fff; }
+  .btn.ghost{ background:#fff; color:var(--green-d); }
+
+  /* 본문 뷰어 (iframe) */
+  .viewer-wrap{ padding:14px 22px 22px; }
+  .viewer{ width:100%; border:1px solid var(--line); border-radius:12px; background:#fff; }
+
+  .empty{ padding:60px 22px; text-align:center; color:var(--muted); }
+  .empty .big{ font-size:15px; color:var(--ink-2); font-weight:700; }
+
+  footer.foot{ max-width:1180px; margin:0 auto; padding:0 22px 40px; color:var(--muted); font-size:11.5px; }
+  footer.foot hr{ border:0; border-top:1px solid var(--line); margin:0 0 14px; }
+
+  @media (max-width:860px){
+    .layout{ grid-template-columns:1fr; }
+    .side{ position:static; }
+    .list{ max-height:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="logo">
+      <div class="mark">인</div>
+      <div class="txt"><b>인노사 데일리 정보</b><span>인사·노무 리스크 데일리 브리핑</span></div>
+    </div>
+    <div class="top-spacer"></div>
+    <div class="top-badge" id="count-badge">리포트 0건</div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>오늘의 인사노무 <span class="ac">리스크</span>를 한눈에</h1>
+  <p>매일 발행되는 인사노무 리스크·우선순위 리포트를 일자별로 모아 봅니다. 왼쪽에서 날짜를 고르면 본문을 바로 읽고, PDF로 내려받을 수 있습니다.</p>
+</section>
+
+<div class="layout">
+  <aside class="side">
+    <h2>발행 리스트</h2>
+    <div class="list" id="list"></div>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="empty" id="empty"><div class="big">리포트를 불러오는 중…</div></div>
+  </main>
+</div>
+
+<footer class="foot">
+  <hr>
+  <div>인노사 데일리 정보 · 인사·노무 리스크 데일리 리포트 아카이브. 근거는 고용노동부·대법원·한국노동연구원 등 1차 자료 기준. 본 자료는 참고용이며 법률 자문이 아닙니다.</div>
+</footer>
+
+<script>
+(function(){
+  var listEl = document.getElementById('list');
+  var mainEl = document.getElementById('main');
+  var badge  = document.getElementById('count-badge');
+
+  function esc(s){ return (s||'').replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function render(reports){
+    if(!reports.length){
+      mainEl.innerHTML = '<div class="empty"><div class="big">아직 발행된 리포트가 없습니다.</div></div>';
+      return;
+    }
+    // 최신순 정렬
+    reports.sort(function(a,b){ return a.date < b.date ? 1 : -1; });
+    badge.textContent = '리포트 ' + reports.length + '건';
+
+    listEl.innerHTML = reports.map(function(r,i){
+      return '<button class="item'+(i===0?' on':'')+'" data-i="'+i+'">'
+        + '<div class="d"><span class="date">'+esc(r.date)+'</span>'+(i===0?'<span class="new">최신</span>':'')+'</div>'
+        + '<div class="t">'+esc(r.title||'인사노무 리스크 리포트')+'</div>'
+        + (r.summary?'<div class="sm">'+esc(r.summary)+'</div>':'')
+        + (r.tags&&r.tags.length?'<div class="tags">'+r.tags.map(function(t){return '<span class="tag">'+esc(t)+'</span>';}).join('')+'</div>':'')
+        + '</button>';
+    }).join('');
+
+    Array.prototype.forEach.call(listEl.querySelectorAll('.item'), function(btn){
+      btn.addEventListener('click', function(){
+        Array.prototype.forEach.call(listEl.querySelectorAll('.item'), function(b){ b.classList.remove('on'); });
+        btn.classList.add('on');
+        show(reports[+btn.getAttribute('data-i')]);
+      });
+    });
+
+    show(reports[0]);
+  }
+
+  function show(r){
+    mainEl.innerHTML =
+      '<div class="doc-head"><div class="date">'+esc(r.date)+'</div><h2>'+esc(r.title||'인사노무 리스크 리포트')+'</h2></div>'
+      + '<div class="attach">'
+      +   '<div class="ic"></div>'
+      +   '<div class="info"><b>'+esc(r.date)+'_인사노무리스크리포트.pdf</b><span>첨부파일 · PDF 문서</span></div>'
+      +   '<div class="sp"></div>'
+      +   '<a class="btn ghost" href="'+esc(r.pdf)+'" target="_blank" rel="noopener">새 탭에서 열기</a>'
+      +   '<a class="btn primary" href="'+esc(r.pdf)+'" download="'+esc(r.date)+'_인사노무리스크리포트.pdf">PDF 다운로드</a>'
+      + '</div>'
+      + '<div class="viewer-wrap"><iframe class="viewer" id="viewer" src="'+esc(r.html)+'" title="리포트 본문"></iframe></div>';
+
+    var vf = document.getElementById('viewer');
+    vf.style.height = '900px';
+    vf.addEventListener('load', function(){
+      try{
+        var h = vf.contentDocument.body.scrollHeight;
+        if(h && h > 200) vf.style.height = (h + 24) + 'px';
+      }catch(e){ /* 다른 출처면 고정 높이 유지 */ }
+    });
+  }
+
+  fetch('reports.json', {cache:'no-store'})
+    .then(function(res){ if(!res.ok) throw new Error('load'); return res.json(); })
+    .then(render)
+    .catch(function(){
+      mainEl.innerHTML = '<div class="empty"><div class="big">목록을 불러오지 못했습니다.</div>'
+        + '<p>GitHub Pages 또는 로컬 서버(예: <code>python -m http.server</code>)로 열어 주세요. 파일을 브라우저에서 직접 열면 보안 정책상 목록이 로드되지 않을 수 있습니다.</p></div>';
+    });
+})();
+</script>
+</body>
+</html>

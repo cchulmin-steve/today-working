@@ -1,0 +1,342 @@
+<meta charset="utf-8">
+<title>인사노무 리스크·우선순위 리포트 2026-07-13</title>
+<style>
+  :root{
+    --ground:#F6F9F7; --surface:#FFFFFF; --surface-2:#F0F5F1;
+    --ink:#16201A; --ink-2:#3C4A42; --muted:#5F6F65;
+    --hair:#E4EBE6; --hair-strong:#CFDBD3;
+    --green:#00A651; --green-deep:#00723A; --green-tint:#E7F5EC;
+    --up:#C0392B; --up-tint:#FBEDEA;
+    --shadow:0 1px 2px rgba(16,32,24,.04),0 6px 20px rgba(16,32,24,.05);
+    --maxw:940px;
+  }
+  *{ box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  @page{ size:A4; margin:14mm 12mm; }
+  @media print{
+    body{ background:#fff; font-size:10.6pt; }
+    header.masthead,.wrap{ max-width:none; padding-left:0; padding-right:0; }
+    .wrap{ padding-bottom:0; }
+    header.masthead{ padding:2px 0 6px; }
+    header.masthead h1.title{ font-size:27px; }
+    header.masthead .rule{ background:var(--green); }
+    .card,.conclusion,.gradebox,.summary,.act{ box-shadow:none; break-inside:avoid; }
+    .block-head{ break-after:avoid; }
+    footer.sources{ break-inside:avoid; }
+    ul.srclist{ columns:2; }
+  }
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:"Pretendard","Pretendard Variable",-apple-system,"Apple SD Gothic Neo",
+                "Malgun Gothic","맑은 고딕","Noto Sans KR",system-ui,sans-serif;
+    font-size:15.5px; line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    word-break:keep-all; overflow-wrap:anywhere;
+  }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px 64px; }
+
+  /* ── 표지 ── */
+  header.masthead{ max-width:var(--maxw); margin:0 auto; padding:20px 24px 14px; }
+  .eyebrow{ display:flex; align-items:center; gap:12px; font-size:12px; font-weight:700;
+            letter-spacing:.14em; text-transform:uppercase; color:var(--green-deep); margin-bottom:18px; }
+  .eyebrow .dot{ width:8px; height:8px; border-radius:50%; background:var(--green); flex:none; }
+  .eyebrow .date{ color:var(--muted); font-weight:600; letter-spacing:.06em; font-variant-numeric:tabular-nums; }
+  h1.title{ margin:0; font-size:clamp(28px,5vw,42px); line-height:1.14; font-weight:800; letter-spacing:-.02em; text-wrap:balance; }
+  h1.title .accent{ color:var(--green); }
+  .subtitle{ margin:14px 0 0; max-width:64ch; color:var(--muted); font-size:15px; }
+  .cover-meta{ margin-top:16px; font-size:12.5px; color:var(--muted); }
+  .cover-meta b{ color:var(--ink-2); }
+  .rule{ height:3px; margin-top:24px; border:0; border-radius:2px;
+         background:linear-gradient(90deg,var(--green) 0%,var(--green) 38%,var(--hair-strong) 38%,var(--hair-strong) 100%); }
+
+  /* ── 섹션 헤더 ── */
+  section.block{ margin-top:20px; }
+  .block-head{ display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:11px; }
+  .block-idx{ font-size:13px; font-weight:800; color:var(--green); font-variant-numeric:tabular-nums; letter-spacing:.05em; }
+  h2.block-title{ margin:0; font-size:20px; font-weight:800; letter-spacing:-.01em; }
+  .block-note{ margin-left:auto; font-size:12.5px; color:var(--muted); }
+
+  /* ── 3줄 요약 (하이라이트 카드) ── */
+  .summary{ background:var(--surface); border:1px solid var(--green); border-radius:14px;
+            box-shadow:var(--shadow); overflow:hidden; }
+  .summary .cap{ background:var(--green); color:#fff; padding:11px 22px; font-weight:800; font-size:14px;
+                 display:flex; align-items:center; gap:10px; }
+  .summary .cap .k{ font-size:11px; opacity:.85; letter-spacing:.1em; text-transform:uppercase; }
+  .summary ol{ margin:0; padding:11px 24px 13px 42px; }
+  .summary li{ margin:5px 0; color:var(--ink-2); font-size:14px; }
+  .summary li b{ color:var(--ink); font-weight:700; }
+
+  /* ── 카드 (핵심 근거) ── */
+  .cards{ display:block; }
+  .card{ background:var(--surface); border:1px solid var(--hair); border-radius:14px;
+         padding:12px 18px; margin-bottom:9px; box-shadow:var(--shadow); position:relative; overflow:hidden; }
+  .card::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--green); opacity:.85; }
+  .card h3{ margin:0 0 7px; font-size:15.5px; font-weight:750; letter-spacing:-.01em; line-height:1.35; }
+  .card p.body{ margin:0; color:var(--ink-2); font-size:14px; }
+  .card p.body b{ color:var(--ink); font-weight:700; font-variant-numeric:tabular-nums; }
+  .impact{ display:flex; gap:8px; margin-top:8px; padding:7px 11px; border-radius:9px;
+           background:var(--green-tint); font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .impact .lab{ flex:none; font-weight:800; color:var(--green-deep); font-size:11px; letter-spacing:.04em; padding-top:1px; }
+  .impact.risk{ background:var(--up-tint); }
+  .impact.risk .lab{ color:var(--up); }
+  .meta{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:8px; padding-top:7px; border-top:1px dashed var(--hair-strong); }
+  .tag{ font-size:11px; font-weight:700; letter-spacing:.03em; color:var(--green-deep); background:var(--surface-2);
+        border:1px solid var(--hair-strong); border-radius:999px; padding:3px 9px; }
+  .src{ font-size:12px; color:var(--muted); }
+  .src b{ color:var(--ink-2); font-weight:600; }
+  .case-no{ font-variant-numeric:tabular-nums; font-weight:700; color:var(--green-deep); }
+
+  /* ── 리스크 등급표 ── */
+  .gradebox{ background:var(--surface); border:1px solid var(--hair); border-radius:14px; box-shadow:var(--shadow); overflow:hidden; }
+  table{ width:100%; border-collapse:collapse; font-size:13px; }
+  thead th{ background:var(--green); color:#fff; font-weight:700; font-size:12px; padding:9px 14px; text-align:left; }
+  tbody td{ border-top:1px solid var(--hair); padding:9px 14px; vertical-align:top; color:var(--ink-2); }
+  tbody tr:nth-child(even){ background:var(--surface-2); }
+  tbody td b{ color:var(--ink); }
+  td .sub{ color:var(--muted); font-size:11.5px; }
+  .g{ text-align:center; white-space:nowrap; font-weight:800; }
+  .g-sang{ display:inline-block; color:#fff; background:var(--green); border-radius:999px; padding:2px 12px; font-size:12px; }
+  .g-jung{ display:inline-block; color:var(--green-deep); border:1px solid var(--green); border-radius:999px; padding:1px 11px; font-size:12px; }
+  .g-ha{ display:inline-block; color:var(--muted); border:1px solid var(--hair-strong); border-radius:999px; padding:1px 11px; font-size:12px; }
+
+  /* ── 우선순위 액션 ── */
+  .actions{ display:block; }
+  .act{ background:var(--surface); border:1px solid var(--hair); border-left:4px solid var(--green);
+        border-radius:0 14px 14px 0; padding:11px 18px; margin-bottom:9px; box-shadow:var(--shadow); }
+  .act .head{ display:flex; align-items:center; gap:10px; margin-bottom:5px; flex-wrap:wrap; }
+  .act .ptag{ font-size:11px; font-weight:800; letter-spacing:.03em; color:#fff; background:var(--green); border-radius:999px; padding:3px 11px; }
+  .act .ptag.sec{ background:var(--green-deep); }
+  .act .ptag.mon{ background:#8a9a90; }
+  .act .t{ font-weight:800; font-size:15px; letter-spacing:-.01em; }
+  .act .d{ margin:0; color:var(--ink-2); font-size:13.5px; line-height:1.55; }
+  .act .d b{ color:var(--green-deep); }
+
+  /* ── 결론 ── */
+  .conclusion{ margin-top:20px; background:var(--surface); border:1px solid var(--green); border-radius:16px; overflow:hidden; box-shadow:var(--shadow); }
+  .conclusion .cap{ background:var(--green); color:#fff; padding:13px 24px; font-weight:800; font-size:15px; display:flex; align-items:center; gap:10px; }
+  .conclusion .cap .k{ font-size:12px; font-weight:700; opacity:.85; letter-spacing:.1em; text-transform:uppercase; }
+  .concl-body{ padding:14px 24px 18px; }
+  .concl-body p{ margin:0; color:var(--ink); font-size:15px; line-height:1.6; }
+  .concl-body p b{ color:var(--green-deep); font-weight:800; }
+  .devil{ margin-top:14px; padding-top:13px; border-top:1px dashed var(--hair-strong); display:flex; gap:10px; }
+  .devil .lab{ flex:none; font-weight:800; color:var(--green-deep); font-size:12px; letter-spacing:.02em; }
+  .devil .v{ margin:0; color:var(--ink-2); font-size:13px; line-height:1.55; }
+  .devil .v b{ color:var(--ink); }
+
+  /* ── 출처 ── */
+  footer.sources{ margin-top:20px; padding-top:14px; border-top:1px solid var(--hair); }
+  footer.sources h4{ margin:0 0 6px; font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+  .note{ margin:0 0 14px; font-size:12.5px; color:var(--muted); line-height:1.55; }
+  ul.srclist{ list-style:none; margin:0; padding:0; columns:2; column-gap:32px; }
+  ul.srclist li{ break-inside:avoid; font-size:12px; padding:4px 0; color:var(--ink-2); }
+  ul.srclist li a{ color:var(--green-deep); text-decoration:none; font-weight:600; }
+  .disc{ margin-top:16px; font-size:11.5px; color:var(--muted); }
+</style>
+
+<!-- ══ 표지 (p.1) ══ -->
+<header class="masthead">
+  <div class="eyebrow">
+    <span class="dot"></span>
+    <span>인사노무 리스크·우선순위 리포트</span>
+    <span class="date">2026 · 07 · 13</span>
+  </div>
+  <h1 class="title">오늘의 한국 인사노무 <span class="accent">리스크</span>와 우선순위</h1>
+  <p class="subtitle">노사 이슈·HR 트렌드·노동법 판례(외부 신호)를 우리 상황에 비춰 리스크 등급(상·중·하)과 지금 손대야 할 업무 우선순위로 정리했습니다. 멀티에이전트 토론(조사3 · 판단 · 악마의변호인 검증 · 종합)의 확정본입니다.</p>
+  <div class="cover-meta">기준 시점 2026년 상반기 &nbsp;·&nbsp; 회사 상황 <b>미입력 — 일반 기업 기준 적용</b> &nbsp;·&nbsp; 등급은 실측 데이터 확보 전까지 잠정</div>
+  <hr class="rule" />
+</header>
+
+<div class="wrap">
+
+  <!-- 3줄 요약 -->
+  <section class="block" style="margin-top:8px">
+    <div class="summary">
+      <div class="cap"><span class="k">SUMMARY</span><span>3줄 요약</span></div>
+      <ol><li><b>현대차 노조 부분파업 돌입(오늘~15일).</b> 완성차 파업은 협력사 연쇄 차질 — 노란봉투법 국면과 겹쳐 노사 리스크 최우선.</li><li><b>최저임금 심의 최종주 — 노 1.2만원 vs 사 동결 격차</b>, 이번 주 의결 전망.</li><li>통상임금 산정기초 확대·포괄임금 현장지도는 상시 리스크이며, 실측 데이터 부재가 근원.</li></ol>
+    </div>
+  </section>
+
+  <!-- ① 노사 이슈 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-idx">01</span>
+      <h2 class="block-title">노사 주요 이슈</h2>
+      <span class="block-note">현대차 파업 돌입 · 최저임금 심의 최종주</span>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <h3>현대차 노조 부분파업 돌입 — 오늘부터 15일까지</h3>
+        <p class="body">임협 결렬로 노조가 <b>7.13~15 매일 2시간 부분파업</b> 개시(작년 영업이익 약 19.5%↓ 국면). 중노위 조정 불성립으로 쟁의권 확보.</p>
+        <div class="impact risk"><span class="lab">위험 신호</span><span>완성차 파업은 협력사 연쇄 생산차질 — 대형 사업장 파업은 공급망 파장.</span></div>
+        <div class="meta"><span class="tag">파업</span><span class="src"><b>출처</b> · 파이낸셜뉴스 2026.7</span></div>
+      </article>
+      <article class="card">
+        <h3>최저임금 심의 최종주 — 노사 격차 속 금주 의결 전망</h3>
+        <p class="body">최저임금위 심의가 막바지. 노동계 1.2만원대·경영계 동결에서 격차 축소 중이나 합의 난망, <b>이번 주 표결 처리</b> 가능성.</p>
+        <div class="impact risk"><span class="lab">위험 신호</span><span>인상폭 확정 시 2027 인건비·연봉테이블 즉시 반영 필요.</span></div>
+        <div class="meta"><span class="tag">최저임금</span><span class="src"><b>출처</b> · 고용노동부 2026.7 / 뉴스1</span></div>
+      </article>
+      <article class="card">
+        <h3>노란봉투법(노조법 2·3조) 2026.3.10 시행 — 원청 교섭·쟁의 확대</h3>
+        <p class="body">‘사용자’ 범위가 실질 지배력을 가진 <b>원청</b>까지 확대, 원청이 하청노조 단체교섭 상대가 됨. 시행 후 하청노조 <b>1,151곳</b>이 원청 <b>434곳</b>에 교섭 요구(시행 100일 기준). </p>
+        <div class="impact risk"><span class="lab">위험 신호</span><span>도급·하청 구조 기업은 교섭 상대·쟁의 범위가 예측 불가하게 확대 — 불법파견 직접고용의무와 결합 시 손배 노출.</span></div>
+        <div class="meta"><span class="tag">노사관계</span><span class="src"><b>출처</b> · 고용노동부 해석지침 2026.2 / 뉴데일리 2026</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ② HR·노무 트렌드 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-idx">02</span>
+      <h2 class="block-title">HR·노무 트렌드</h2>
+      <span class="block-note">정년연장 · 근로시간 단축 · AI HR</span>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <h3>정년연장·재고용 압박 본격화</h3>
+        <p class="body">경총 조사 기업 <b>52.4%</b>가 “법정 정년 65세 연장 시 임금체계 개편·신규 채용 축소 등 추가 대응 불가피”라고 응답. 한경협은 65세 연장 시 60~64세 정규직 고용비용을 <b>연 30.2조원</b>으로 추산. 2026 임단협 쟁점 1위(49.7%).</p>
+        <div class="impact risk"><span class="lab">위험 신호</span><span>정년·임금피크·재고용을 병행 설계하지 못하면 인건비 급증과 신규 채용 여력 축소가 동시 발생.</span></div>
+        <div class="meta"><span class="tag">정년연장</span><span class="src"><b>출처</b> · 경총 2026.6 / 한경협 2026 / 한국노동연구원 2026.1</span></div>
+      </article>
+      <article class="card">
+        <h3>근로시간 단축·근기법 개정·포괄임금 방지 — 현장지도 착수</h3>
+        <p class="body">근기법 개정(4시간 근무일 휴게 면제·시간단위 연차) <b>2026.5.7</b> 시행, 주4.5일 시범(예산 324억). 포괄임금 오남용 방지 지침 <b>2026.4.8</b> 발표·<b>4.9 현장지도 착수</b>. OECD 평균(연 1,700시간대) 목표 로드맵 추진.</p>
+        <div class="impact risk"><span class="lab">위험 신호</span><span>유연근무·교대제·포괄임금 관행 사업장은 근태·연차·임금체계 전면 재정비 필요, 미비 시 시정지시 노출.</span></div>
+        <div class="meta"><span class="tag">근로시간</span><span class="src"><b>출처</b> · 고용노동부 2026 업무보고·보도자료</span></div>
+      </article>
+      <article class="card">
+        <h3>AI HR·스킬기반 채용 확산 · 임금총액 첫 5천만원</h3>
+        <p class="body">HR 리더 <b>52%</b>가 2026년 AI 에이전트 도입 계획(딜로이트, 추정), AI 인재 수요 전년 대비 <b>+230%</b>. 학력→직무역량 중심 스킬기반 채용 확산. 상용근로자 연 임금총액 평균 <b>5,061만원</b>으로 사상 첫 5천만원 돌파.</p>
+        <div class="impact risk"><span class="lab">기회/위험</span><span>HR 반복업무 자동화 기회이나, AI 인재 확보 경쟁·보상 인플레와 고정급 여력 축소가 동시 부담.</span></div>
+        <div class="meta"><span class="tag">HR테크</span><span class="tag">보상</span><span class="src"><b>출처</b> · 딜로이트 2026 / 링크드인·캐치 2025.12 / 경총 2026</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ③ 주요 노동법 판례 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-idx">03</span>
+      <h2 class="block-title">주요 노동법 판례</h2>
+      <span class="block-note">통상임금 · 불법파견 · 징계절차 (3요소 확인 7건)</span>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <h3>통상임금 법리 전면 개편 — ‘고정성’ 폐기</h3>
+        <p class="body">대법원 <span class="case-no">2024. 12. 19. 선고 2020다247190·2023다302838</span> 전원합의체. ‘고정성’을 통상임금 징표에서 폐기, <b>재직·근무일수 조건부 상여도 통상임금</b>에 해당. 원칙적 장래효(소급은 계속사건 한정).</p>
+        <div class="impact risk"><span class="lab">위험 신호</span><span>재직조건 상여를 통상임금에서 배제해온 관행 무효화 → 장래 연장·야간·휴일수당 산정기초 상승.</span></div>
+        <div class="meta"><span class="tag">통상임금</span><span class="src"><b>출처</b> · 대법원 보도자료 / 법률신문 2025 판례 동향</span></div>
+      </article>
+      <article class="card">
+        <h3>재직조건부 정기상여·최소지급분 성과급의 통상임금성</h3>
+        <p class="body">대법원 <span class="case-no">2025. 1. 23. 선고 2019다204876</span> — 재직조건이 붙은 정기상여도 통상임금 포함. 대법원 <span class="case-no">2025. 8. 14. 선고 2023다216777</span> — 실적과 무관한 <b>‘최소지급분’ 성과급</b>은 소정근로 대가로 통상임금 해당.</p>
+        <div class="impact risk"><span class="lab">위험 신호</span><span>“재직자에게만 지급” 조건이나 성과급 형식으로는 통상임금 회피 불가 → 상여·성과급 지급구조 재점검.</span></div>
+        <div class="meta"><span class="tag">통상임금</span><span class="src"><b>출처</b> · 대법원 판례속보 / 법률신문</span></div>
+      </article>
+      <article class="card">
+        <h3>불법파견 직접고용의무 · 징계위 절차 하자 무효</h3>
+        <p class="body">대법원 <span class="case-no">2025. 3. 27. 선고 2021다245528(병합)</span> — 사내하도급의 실질이 파견이면 <b>직접고용의무·손해배상</b> 발생. 대법원 <span class="case-no">2025. 7. 18. 선고 2023두61370</span> — 징계위 근로자위원에서 <b>소수노조 조합원 배제 시 절차 위반으로 징계 무효</b>.</p>
+        <div class="impact risk"><span class="lab">위험 신호</span><span>도급·용역의 지휘·명령 실질이 있으면 직접고용의무 발생, 징계는 사유가 타당해도 절차 하자만으로 무효화.</span></div>
+        <div class="meta"><span class="tag">비정규직</span><span class="tag">징계</span><span class="src"><b>출처</b> · 법률신문 2025 판례 동향</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 리스크 등급표 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-idx">04</span>
+      <h2 class="block-title">리스크 등급표</h2>
+      <span class="block-note">상 = 즉시 대응 · 중 = 분기 내 준비 · 하 = 모니터링</span>
+    </div>
+    <div class="gradebox">
+      <table>
+        <thead><tr><th style="width:34%">리스크</th><th style="width:9%">등급</th><th>근거 · 출처</th></tr></thead>
+        <tbody>
+          <tr><td><b>실측 위험노출 데이터 부재</b><br><span class="sub">등급 확정 불가 — 상위 리스크</span></td>
+              <td class="g"><span class="g-sang">상</span></td>
+              <td>재직조건부 상여 비중·사내하청/파견 규모·포괄임금 비율·피소 계속사건 유무 미확보 시 하위 리스크 규모 산정 불가. 확정 전 대응 지연 자체가 리스크.</td></tr>
+          <tr><td><b>노란봉투법 + 불법파견 복합 위험노출</b><br><span class="sub">원청 교섭상대 + 직접고용의무 동시</span></td>
+              <td class="g"><span class="g-sang">상</span></td>
+              <td>노조법 2·3조 2026.3.10 시행, 100일간 하청노조 1,151곳→원청 434곳 교섭요구. 대법 2025.3.27(2021다245528 병합) 직접고용의무·손배 결합.</td></tr>
+          <tr><td><b>통상임금 산정기초 확대</b><br><span class="sub">장래 인건비 증가</span></td>
+              <td class="g"><span class="g-sang">상</span></td>
+              <td>대법 전합 2024.12.19 ‘고정성’ 폐기 — 장래효 원칙이나 재직·근무일수 조건부 상여의 통상임금 산입은 확정. 2025.1.23·2025.8.14로 확대.</td></tr>
+          <tr><td><b>포괄임금·근로시간 위반 적발</b></td>
+              <td class="g"><span class="g-sang">상</span></td>
+              <td>포괄임금 방지 지침 2026.4.8 발표, 4.9 현장지도 착수. 근기법 개정(4시간 휴게면제·시간단위 연차) 2026.5.7 시행.</td></tr>
+          <tr><td><b>통상임금 소급 재정산</b><br><span class="sub">계속사건 한정</span></td>
+              <td class="g"><span class="g-jung">중</span></td>
+              <td>전합 장래효 원칙상 소급은 대상사건 + 선고 당시 계속 중 병행사건에 한정. 피소 계속사건 없으면 원칙적 미발생 — 실사 후 확정.</td></tr>
+          <tr><td><b>징계 절차 하자 무효</b></td>
+              <td class="g"><span class="g-jung">중</span></td>
+              <td>대법 2025.7.18(2023두61370) 징계위 소수노조 배제 시 절차위반으로 징계 무효.</td></tr>
+          <tr><td><b>2027 최저임금 심의(최종주)</b></td>
+              <td class="g"><span class="g-jung">중</span></td>
+              <td>노 1.2만원 vs 사 동결 공방. 공익위원 중재 국면, 금주 내 의결 전망.</td></tr>
+          <tr><td><b>정년연장·재고용 인건비 압박</b></td>
+              <td class="g"><span class="g-jung">중</span></td>
+              <td>임단협 쟁점 49.7%, 경총 52.4% 추가대응 불가피, 한경협 65세 연장 시 연 30.2조.</td></tr>
+          <tr><td>주4.5일·근로시간 단축 제도화</td>
+              <td class="g"><span class="g-ha">하</span></td>
+              <td>주4.5일 시범(324억), 근기법 개정안 국회 계류 — 미확정.</td></tr>
+          <tr><td>성과급·복수노조 내분 확산(동종업계)</td>
+              <td class="g"><span class="g-ha">하</span></td>
+              <td>현대차 부분파업·삼성 성과급 갈등은 개별사 사례 — 흐름 모니터링.</td></tr>
+          <tr><td>AI HR·스킬기반 채용·이탈관리</td>
+              <td class="g"><span class="g-ha">하</span></td>
+              <td>딜로이트·링크드인·원티드 트렌드 — 규제 아닌 인재확보 과제.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 우선순위 액션 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-idx">05</span>
+      <h2 class="block-title">우선순위 액션 3가지</h2>
+    </div>
+    <div class="actions">
+      <div class="act">
+        <div class="head"><span class="ptag">최우선</span><span class="t">노란봉투법·불법파견 복합 위험노출 즉시 대응 체계 가동</span></div>
+        <p class="d">도급·사내하청 계약과 원청 지배력 구조를 진단하고, 하청노조 교섭요구 접수 시 대응 절차(교섭당사자 판단·회신기한·공고)를 지금 수립(HR·법무·현업). 이미 시행·교섭요구 현실화, 직접고용의무 결합 시 손배 노출. <b>→ 대응 체계 즉시 가동, 도급구조 진단 4주 내 완료.</b></p>
+      </div>
+      <div class="act">
+        <div class="head"><span class="ptag sec">최우선·병행</span><span class="t">통상임금·실측 위험노출 산정</span></div>
+        <p class="d">재직조건부 상여 비중과 피소 계속사건 유무를 확인해 (가) 소급분(계속사건 한정)과 (나) 장래 임금체계 부담을 분리 산정하고, 상여 지급구조 재설계안 마련(급여·법무). 장래효라도 산정기초 확대는 확정. <b>→ 3분기 내 위험노출 산정, 4분기 개편안 확정.</b></p>
+      </div>
+      <div class="act">
+        <div class="head"><span class="ptag mon">모니터링·병행</span><span class="t">포괄임금 실태점검 + 확정 팩트 대비</span></div>
+        <p class="d">포괄임금 직군 실근로시간·수당 지급 실태를 자체 점검(현장지도 대응)하고, 2027 최저임금·정년연장·징계절차 규정을 분기 단위 추적. <b>→ 포괄임금은 8월 말까지 위반소지 시정, 나머지는 다음 임단협 준비 시점까지 대응 초안.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 결론 -->
+  <div class="conclusion">
+    <div class="cap"><span class="k">결론</span><span>최종 결정</span></div>
+    <div class="concl-body">
+      <p>노란봉투법·불법파견 <b>복합 위험노출를 최우선으로 즉시 대응</b>하고, 통상임금·포괄임금은 <b>회사 실측 데이터 확보 후 등급을 확정</b>한다.</p>
+      <div class="devil">
+        <span class="lab">수용한 보완 조건<br><span style="font-weight:600;color:var(--muted)">악마의 변호인</span></span>
+        <p class="v">회사 실측 위험노출(상여 구조·하청 규모·포괄임금 비율·피소 계속사건 유무) 산정 전까지 <b>등급은 잠정</b>으로 두고, 통상임금은 ‘장래효 전제 시나리오’로 좁혀 소급분과 분리 산정하며, 노란봉투법은 대기가 아닌 <b>즉시 교섭요구 대응 체계</b>로 전환한다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 출처 -->
+  <footer class="sources">
+    <h4>참고 출처</h4>
+    <p class="note">1차 자료(고용노동부·대법원·한국노동연구원) 및 정확 인용 매체만 반영. 판례는 사건번호·법원·선고일 3요소 확인분(7건)만 사용. 출처불명·블로그 배제.</p>
+    <ul class="srclist">
+      <li><a href="https://www.shinkim.com/kor/media/newsletter/3139">개정 노란봉투법 시행령·해석지침 (신·김)</a></li>
+      <li><a href="https://biz.newdaily.co.kr/site/data/html/2026/06/19/2026061900060.html">노란봉투법 시행 100일 원·하청 교섭 현황 (뉴데일리)</a></li>
+      <li><a href="https://www.scourt.go.kr/portal/news/NewsViewAction.work?gubun=6&seqnum=2743">대법원 통상임금 전원합의체 보도자료</a></li>
+      <li><a href="https://www.lawtimes.co.kr/news/articleView.html?idxno=216417">법률신문 — 2025년 노동법 판례 동향</a></li>
+      <li><a href="https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19659">고용노동부 — 2027년 적용 최저임금 10,700원</a></li>
+      <li><a href="https://www.kli.re.kr/board.es?mid=a10201010200&bid=0046&list_no=147903&act=view">한국노동연구원 — 2026년 노사관계 전망</a></li>
+    </ul>
+    <p class="disc">주 · 회사 상황 미입력으로 일반 기업 기준 등급을 적용했으며, 도급구조·노조 조직률·상여 비중이 큰 기업일수록 등급이 상향될 수 있음. 통상임금 소급효 범위, 정년연장 비용(한경협 30.2조 추산 등) 수치는 조사 표본·전제에 따라 편차 가능.</p>
+  </footer>
+
+</div>

@@ -1,0 +1,21 @@
+# 내부 데이터 (공개 금지)
+*.csv
+
+# 무관한 사업 문서 / 미사용 산출물
+/index.html
+hr-labor-daily-report*.html
+동탄2_*
+공릉_*
+*_인사노무_데일리_리포트.pdf
+
+# 리포트 원본 (사이트 사본이 docs/reports 에 존재)
+/노무리스크리포트_*.html
+/노무리스크리포트_*.pdf
+
+# 로컬 설정 / 임시
+.claude/settings.local.json
+_site_*.png
+
+# OS
+Thumbs.db
+.DS_Store
