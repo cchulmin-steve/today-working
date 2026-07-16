@@ -129,6 +129,17 @@
   ul.srclist li{ break-inside:avoid; font-size:12px; padding:4px 0; color:var(--ink-2); }
   ul.srclist li a{ color:var(--green-deep); text-decoration:none; font-weight:600; }
   .disc{ margin-top:16px; font-size:11.5px; color:var(--muted); }
+
+  /* 리스크 등급표 — 파란색 */
+  .gradebox thead th{ background:#1E6FD9; }
+  .gradebox tbody tr:nth-child(even){ background:#F1F6FD; }
+  .g-sang{ background:#1E6FD9; }
+  .g-jung{ color:#1552A8; border-color:#1E6FD9; }
+  /* 우선순위 액션 — 주황색 */
+  .actions .act{ border-left-color:#E8760C; }
+  .actions .ptag{ background:#E8760C; }
+  .actions .ptag.sec{ background:#C25E00; }
+  .actions .act .d b{ color:#C25E00; }
 </style>
 
 <!-- ══ 표지 (p.1) ══ -->
@@ -244,7 +255,7 @@
   <!-- 리스크 등급표 -->
   <section class="block">
     <div class="block-head">
-      <span class="block-idx">04</span>
+      <span class="block-idx" style="color:#1E6FD9">04</span>
       <h2 class="block-title">리스크 등급표</h2>
       <span class="block-note">상 = 즉시 대응 · 중 = 분기 내 준비 · 하 = 모니터링</span>
     </div>
@@ -293,7 +304,7 @@
   <!-- 우선순위 액션 -->
   <section class="block">
     <div class="block-head">
-      <span class="block-idx">05</span>
+      <span class="block-idx" style="color:#E8760C">05</span>
       <h2 class="block-title">우선순위 액션 3가지</h2>
     </div>
     <div class="actions">
