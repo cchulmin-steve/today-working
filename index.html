@@ -92,11 +92,16 @@
   .main-tools{ padding:16px 22px 22px; border-top:1px solid var(--line); }
   .main-tools .foot-tools-h{ font-weight:800; color:var(--ink-2); font-size:13px; letter-spacing:.02em; margin-bottom:9px; }
   .main-tools ul{ list-style:none; margin:0; padding:0; }
-  .main-tools li{ display:flex; align-items:center; gap:12px; padding:7px 0; font-size:16px; color:var(--ink-2); }
-  .main-tools li .ic{ flex:none; width:34px; height:34px; border-radius:9px; background:var(--green-t);
+  .main-tools li{ padding:0; }
+  .main-tools .tool-link{ display:flex; align-items:center; gap:12px; padding:9px 12px; margin:2px -12px;
+    border-radius:11px; font-size:16px; color:var(--ink-2); text-decoration:none; transition:background .12s; }
+  .main-tools .tool-link:hover{ background:var(--green-t); }
+  .main-tools .tool-link .ic{ flex:none; width:34px; height:34px; border-radius:9px; background:#fff;
     border:1px solid #CDE9D8; display:flex; align-items:center; justify-content:center; font-size:19px; }
-  .main-tools li b{ color:var(--ink); font-weight:700; }
-  .main-tools li .d{ color:var(--muted); font-weight:400; }
+  .main-tools .tool-link b{ color:var(--ink); font-weight:700; }
+  .main-tools .tool-link .d{ color:var(--muted); font-weight:400; }
+  .main-tools .tool-link .ext{ margin-left:auto; flex:none; color:var(--muted); font-size:13px; font-weight:700; }
+  .main-tools .tool-link:hover .ext{ color:var(--green-d); }
 
   /* 본문 뷰어 (iframe) */
   .viewer-wrap{ padding:14px 22px 8px; }
@@ -212,8 +217,8 @@
       + '</div>'
       + '<div class="viewer-wrap"><iframe class="viewer" id="viewer" src="'+esc(r.html)+'?v='+Date.now()+'" title="리포트 본문"></iframe></div>'
       + '<div class="main-tools"><div class="foot-tools-h">관련 도구</div><ul>'
-      +   '<li><span class="ic">🇰🇷</span><span><b>Korean Law MCP</b> <span class="d">(한국 법률/판례 검색)</span></span></li>'
-      +   '<li><span class="ic">🍜</span><span><b>Korean Restaurant MCP</b> <span class="d">(전국 맛집 검색)</span></span></li>'
+      +   '<li><a class="tool-link" href="https://www.law.go.kr/" target="_blank" rel="noopener"><span class="ic">🇰🇷</span><span><b>Korean Law MCP</b> <span class="d">(한국 법률/판례 검색)</span></span><span class="ext">새 창 ↗</span></a></li>'
+      +   '<li><a class="tool-link" href="https://www.diningcode.com/" target="_blank" rel="noopener"><span class="ic">🍜</span><span><b>Korean Restaurant MCP</b> <span class="d">(전국 맛집 검색)</span></span><span class="ext">새 창 ↗</span></a></li>'
       + '</ul></div>';
 
     var vf = document.getElementById('viewer');
