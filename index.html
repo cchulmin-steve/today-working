@@ -90,11 +90,13 @@
 
   /* 본문 하단 관련 도구 */
   .main-tools{ padding:16px 22px 22px; border-top:1px solid var(--line); }
-  .main-tools .foot-tools-h{ font-weight:800; color:var(--ink-2); font-size:12px; letter-spacing:.02em; margin-bottom:6px; }
-  .main-tools ol{ margin:0; padding-left:20px; }
-  .main-tools li{ font-size:13.5px; color:var(--ink-2); padding:3px 0; }
+  .main-tools .foot-tools-h{ font-weight:800; color:var(--ink-2); font-size:13px; letter-spacing:.02em; margin-bottom:9px; }
+  .main-tools ul{ list-style:none; margin:0; padding:0; }
+  .main-tools li{ display:flex; align-items:center; gap:12px; padding:7px 0; font-size:16px; color:var(--ink-2); }
+  .main-tools li .ic{ flex:none; width:34px; height:34px; border-radius:9px; background:var(--green-t);
+    border:1px solid #CDE9D8; display:flex; align-items:center; justify-content:center; font-size:19px; }
   .main-tools li b{ color:var(--ink); font-weight:700; }
-  .main-tools li span{ color:var(--muted); }
+  .main-tools li .d{ color:var(--muted); font-weight:400; }
 
   /* 본문 뷰어 (iframe) */
   .viewer-wrap{ padding:14px 22px 8px; }
@@ -209,10 +211,10 @@
       +   '<a class="btn primary" href="'+esc(r.pdf)+'" download="'+esc(r.date)+'_인사노무리스크리포트.pdf">PDF 다운로드</a>'
       + '</div>'
       + '<div class="viewer-wrap"><iframe class="viewer" id="viewer" src="'+esc(r.html)+'?v='+Date.now()+'" title="리포트 본문"></iframe></div>'
-      + '<div class="main-tools"><div class="foot-tools-h">관련 도구</div><ol>'
-      +   '<li>🇰🇷 <b>Korean Law MCP</b> <span>(한국 법률/판례 검색)</span></li>'
-      +   '<li>🍜 <b>Korean Restaurant MCP</b> <span>(전국 맛집 검색)</span></li>'
-      + '</ol></div>';
+      + '<div class="main-tools"><div class="foot-tools-h">관련 도구</div><ul>'
+      +   '<li><span class="ic">🇰🇷</span><span><b>Korean Law MCP</b> <span class="d">(한국 법률/판례 검색)</span></span></li>'
+      +   '<li><span class="ic">🍜</span><span><b>Korean Restaurant MCP</b> <span class="d">(전국 맛집 검색)</span></span></li>'
+      + '</ul></div>';
 
     var vf = document.getElementById('viewer');
     vf.style.height = '900px';
